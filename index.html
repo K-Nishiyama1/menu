@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gaming Bar BJ Menu</title>
+  <title>Gaming Bar BJ Signage</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       width: 100vw;
@@ -20,10 +24,10 @@
       position: absolute;
       inset: 0;
       display: none;
-      padding: 48px 64px;
+      padding: clamp(20px, 4vw, 64px);
       background:
-        radial-gradient(circle at top left, rgba(0,255,160,.25), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(255,200,40,.22), transparent 35%),
+        radial-gradient(circle at top left, rgba(0, 255, 160, 0.22), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(255, 205, 80, 0.2), transparent 35%),
         linear-gradient(135deg, #111, #030303);
     }
 
@@ -36,78 +40,127 @@
     .card {
       width: 100%;
       height: 100%;
-      border: 3px solid rgba(255, 210, 80, .75);
-      border-radius: 32px;
-      padding: 56px;
-      background: rgba(0,0,0,.68);
+      border: clamp(2px, 0.25vw, 4px) solid rgba(255, 210, 80, 0.75);
+      border-radius: clamp(20px, 3vw, 40px);
+      padding: clamp(24px, 4.5vw, 72px);
+      background: rgba(0, 0, 0, 0.68);
       display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 48px;
-      box-shadow: 0 0 50px rgba(255,210,80,.2);
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(20px, 4vw, 64px);
+      box-shadow: 0 0 50px rgba(255, 210, 80, 0.18);
+      overflow: hidden;
     }
 
     .content {
+      min-width: 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      overflow: hidden;
     }
 
     .label {
       color: #ffd45a;
-      font-size: 28px;
-      letter-spacing: .18em;
-      margin-bottom: 24px;
-      font-weight: bold;
+      font-size: clamp(0.9rem, 2.4vw, 2rem);
+      letter-spacing: 0.14em;
+      margin-bottom: clamp(12px, 2vh, 28px);
+      font-weight: 800;
     }
 
     h1 {
-      font-size: 72px;
-      line-height: 1.15;
-      margin-bottom: 32px;
-      text-shadow: 0 0 18px rgba(255,255,255,.25);
+      font-size: clamp(2.4rem, 7vw, 6rem);
+      line-height: 1.12;
+      margin-bottom: clamp(18px, 3vh, 40px);
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+      word-break: keep-all;
+    }
+
+    p {
+      font-size: clamp(1.1rem, 3vw, 2.4rem);
+      line-height: 1.65;
+      font-weight: 700;
+      word-break: keep-all;
     }
 
     .green { color: #73ffb2; }
     .gold { color: #ffd45a; }
     .pink { color: #ff91d8; }
 
-    p {
-      font-size: 32px;
-      line-height: 1.7;
-      font-weight: bold;
-    }
-
     .visual {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 150px;
+      font-size: clamp(5rem, 15vw, 13rem);
+      filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.25));
     }
 
-    .food {
-      font-size: 46px;
-      line-height: 1.5;
-      margin-top: 24px;
+    .food-list {
+      display: grid;
+      gap: clamp(14px, 2vh, 28px);
+      margin-top: clamp(8px, 2vh, 24px);
+    }
+
+    .food-item {
+      padding: clamp(14px, 2vw, 28px);
+      border-radius: clamp(14px, 2vw, 26px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: clamp(1.4rem, 4vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.35;
+      word-break: keep-all;
     }
 
     .event-date {
-      font-size: 96px;
+      font-size: clamp(3rem, 10vw, 8rem);
       color: #ffd45a;
       font-weight: 900;
-      margin-bottom: 24px;
+      line-height: 1;
+      margin-bottom: clamp(18px, 3vh, 36px);
     }
 
     .footer {
       position: fixed;
-      bottom: 24px;
-      left: 64px;
-      right: 64px;
+      bottom: clamp(12px, 2vh, 28px);
+      left: clamp(20px, 4vw, 64px);
+      right: clamp(20px, 4vw, 64px);
       display: flex;
       justify-content: space-between;
-      color: rgba(255,255,255,.65);
-      font-size: 20px;
-      letter-spacing: .12em;
+      color: rgba(255, 255, 255, 0.65);
+      font-size: clamp(0.75rem, 1.6vw, 1.2rem);
+      letter-spacing: 0.12em;
       z-index: 10;
+      pointer-events: none;
+    }
+
+    @media (max-aspect-ratio: 4 / 3) {
+      .card {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+        text-align: center;
+      }
+
+      .visual {
+        font-size: clamp(4rem, 18vw, 9rem);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .card {
+        padding: clamp(20px, 6vw, 40px);
+      }
+
+      h1 {
+        font-size: clamp(2rem, 9vw, 4rem);
+      }
+
+      p {
+        font-size: clamp(1rem, 4vw, 1.8rem);
+      }
+
+      .food-item {
+        font-size: clamp(1.2rem, 5vw, 2.2rem);
+      }
     }
   </style>
 </head>
@@ -117,7 +170,10 @@
     <div class="card">
       <div class="content">
         <div class="label">RECOMMENDED COCKTAIL</div>
-        <h1>ミッドサマー<br><span class="green">クーラー</span></h1>
+        <h1>
+          ミッドサマー<br>
+          <span class="green">クーラー</span>
+        </h1>
         <p>
           グリーンアップルとミスティアを使った<br>
           今の時期にぴったりの爽やかカクテル。
@@ -131,11 +187,14 @@
     <div class="card">
       <div class="content">
         <div class="label">RECOMMENDED FOOD</div>
-        <h1>本日のおすすめ<br><span class="gold">フード</span></h1>
-        <p class="food">
-          ・オクラとトマトの冷製パスタ<br>
-          ・キャベツとエビのペペロンチーノ
-        </p>
+        <h1>
+          本日のおすすめ<br>
+          <span class="gold">フード</span>
+        </h1>
+        <div class="food-list">
+          <div class="food-item">オクラとトマトの冷製パスタ</div>
+          <div class="food-item">キャベツとエビのペペロンチーノ</div>
+        </div>
       </div>
       <div class="visual">🍝</div>
     </div>
@@ -145,7 +204,10 @@
     <div class="card">
       <div class="content">
         <div class="label">RECOMMENDED DESSERT</div>
-        <h1>昔懐かしの！<br><span class="pink">宝石箱アイス</span></h1>
+        <h1>
+          昔懐かしの！<br>
+          <span class="pink">宝石箱アイス</span>
+        </h1>
         <p>
           カラフルで楽しい、レトロなデザート。<br>
           食後にも、お酒の合間にもおすすめです。
@@ -160,7 +222,9 @@
       <div class="content">
         <div class="label">SPECIAL EVENT</div>
         <div class="event-date">6/27</div>
-        <h1><span class="gold">イベント開催！</span></h1>
+        <h1>
+          <span class="gold">イベント開催！</span>
+        </h1>
         <p>
           Gaming Bar BJ 特別イベント開催。<br>
           詳細はスタッフまでお声がけください。
